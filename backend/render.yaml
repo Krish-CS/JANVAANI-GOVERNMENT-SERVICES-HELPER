@@ -1,0 +1,35 @@
+# ─── Render Deployment Config ───
+# Deploy as a Web Service on Render Free Tier
+# https://render.com
+
+services:
+  - type: web
+    name: janvaani-api
+    runtime: python
+    region: singapore  # Closest to India
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: CEREBRAS_API_KEY
+        sync: false
+      - key: NVIDIA_API_KEY
+        sync: false
+      - key: LOCAL_STT_MODEL
+        value: "large-v3"
+      - key: LOCAL_STT_DEVICE
+        value: "cpu"
+      - key: LOCAL_STT_COMPUTE_TYPE
+        value: "int8"
+      - key: LOCAL_TTS_MODEL
+        value: "ai4bharat/indic-parler-tts"
+      - key: LOCAL_TTS_DEVICE
+        value: "cpu"
+      - key: FRONTEND_URL
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+    healthCheckPath: /api/health
+    autoDeploy: true

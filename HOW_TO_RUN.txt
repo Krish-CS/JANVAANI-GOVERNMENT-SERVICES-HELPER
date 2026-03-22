@@ -1,0 +1,43 @@
+JANVAANI - HOW TO RUN
+
+1) Prerequisites
+- Node.js 18 or newer
+- Python 3.12 or newer
+- Git
+
+2) Frontend setup
+- Open a terminal in the project root.
+- Run: npm install
+- Run: npm run dev
+- Open the local Vite URL shown in the terminal.
+
+3) Backend setup on Windows
+- Open a second terminal in the project root.
+- Run: python -m venv .venv
+- Run: .venv\Scripts\Activate.ps1
+- Run: pip install -r backend/requirements.txt
+- Copy backend/.env.example to backend/.env
+- Add your API keys in backend/.env
+- Run: uvicorn backend.main:app --reload --port 8000
+
+4) What each API key is used for
+- GROQ_API_KEY: speech-to-text and primary LLM provider
+- CEREBRAS_API_KEY: LLM fallback provider
+- NVIDIA_API_KEY: LLM fallback provider
+- AZURE_SPEECH_KEY: primary text-to-speech provider
+- AZURE_SPEECH_REGION: required with Azure Speech
+- SARVAM_API_KEY: fallback text-to-speech provider
+- BHASHINI_USER_ID / BHASHINI_API_KEY / BHASHINI_PIPELINE_ID: fallback text-to-speech provider
+
+5) Useful checks
+- Backend health: GET http://localhost:8000/api/health
+- Backend config: GET http://localhost:8000/api/config
+
+6) Build for production
+- Frontend: npm run build
+- Backend: deploy with uvicorn backend.main:app or the Render blueprint in backend/render.yaml
+
+7) Important notes
+- Do not commit backend/.env
+- The assistant is source-grounded and should rely on official context first
+- If the language you speak is Hindi, Tamil, or English, the response should stay fully in that language

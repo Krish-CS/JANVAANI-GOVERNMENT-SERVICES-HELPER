@@ -1,0 +1,86 @@
+JANVAANI DETAILED PROJECT REPORT
+
+1. Project Summary
+JanVaani is a voice-first government services helper for Indian citizens. The application is designed to reduce the friction of understanding and using digital public services by combining speech, language understanding, official-source grounding, and tutorial guidance.
+
+2. Problem Statement
+Many citizens still face difficulty using government portals because the journeys are often text-heavy, multi-step, and language limited. JanVaani addresses that by making the interaction conversational and language-aware.
+
+3. Proposed Solution
+The application accepts speech or text, determines the user language, produces a short answer in the same language, and then offers a step-by-step guide or supporting YouTube tutorial if the service is recognized.
+
+4. Technology Stack
+Frontend:
+- React 19
+- TypeScript
+- Vite
+- Lucide React
+- react-intersection-observer
+
+Backend:
+- FastAPI
+- Python 3.12+
+- Uvicorn
+- Pydantic Settings
+- HTTPX
+- BeautifulSoup4
+- OpenAI-compatible API clients
+- YouTube search libraries
+
+AI and Speech:
+- Groq Whisper for speech-to-text
+- Groq as the primary LLM provider
+- Cerebras and NVIDIA NIM as LLM fallback providers
+- Azure Speech as the primary text-to-speech provider
+- Sarvam and Bhashini as TTS fallback providers
+
+5. Core Features
+- Multilingual speech-to-speech assistant
+- Same-language replies for English, Hindi, and Tamil, with support for more Indian languages
+- Official-source-aware guide generation
+- Service-specific document, eligibility, fee, and contact notes
+- YouTube tutorial discovery for related services
+- Frontend cues for guide availability and video availability
+
+6. Backend Flow
+- User input reaches the backend through the speech or text routes.
+- Speech is converted to text using Groq Whisper.
+- The LLM generates a short, same-language reply.
+- The backend builds official context from curated service records and scraped government pages.
+- The guide generator creates a structured service guide when a service is identified.
+- The TTS service converts the final reply into audio.
+- The frontend receives the response and can show guide/video actions.
+
+7. Language Handling
+The assistant is tuned to avoid mixed-language replies. It should respond fully in the user's chosen language:
+- English only for English input
+- Hindi only for Hindi input
+- Tamil only for Tamil input
+The backend also uses a purity check and rewrite fallback to reduce code-switching.
+
+8. Service Coverage
+The codebase includes support patterns for services such as:
+- Aadhaar
+- Ration card
+- PAN card guidance
+- Voter ID
+- Passport
+- PM Kisan
+- Certificates and welfare-related service flows
+
+9. Documentation Files Included
+- README.md: main project homepage and quick overview
+- docs/PROJECT_OVERVIEW.md: longer architecture and product summary
+- HOW_TO_RUN.txt: Windows-friendly run instructions
+- DETAILED_REPORT.txt: full project explanation
+
+10. Deployment Options
+- Local development using Vite and FastAPI
+- Render deployment using backend/render.yaml
+- Docker-based backend deployment
+- Static frontend deployment on Vercel, Netlify, or GitHub Pages
+
+11. Notes
+- The project is source-grounded and should not be described as AI-only.
+- The repository should keep .env files out of git.
+- The LLM model default is openai/gpt-oss-120b for Groq compatibility.
