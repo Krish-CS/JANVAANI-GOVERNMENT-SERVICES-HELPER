@@ -1590,7 +1590,7 @@ export default function DemoSection({
           <p className="mt-2 text-center text-[9px] sm:text-[10px] text-slate-600">
             {backendStatus === "online" ? (
               <>
-                🎤 Mic → Groq Whisper STT • 🧠 Groq/Cerebras LLM • 🔊
+                🎤 Mic → Groq Whisper STT • 🧠 GPT-OSS 120B LLM • 🔊
                 Voice output stack •{" "}
                 <span className="text-emerald-500 font-semibold">
                   Full Pipeline Active

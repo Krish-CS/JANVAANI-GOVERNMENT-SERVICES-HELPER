@@ -25,7 +25,7 @@ const FLOW_STEPS = [
   {
     emoji: "🧠",
     title: "AI Understands",
-    tech: "Llama 3.3 70B",
+    tech: "GPT-OSS 120B",
     desc: "LLM extracts intent, identifies the service needed, and uses official portal data plus curated service records to formulate the next question",
     icon: Brain,
     color: "from-violet-500 to-purple-600",

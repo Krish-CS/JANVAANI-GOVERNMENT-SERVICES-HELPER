@@ -54,7 +54,7 @@ const DEPLOY_STACK = [
   { name: "Frontend", tech: "React + Vite", host: "GitHub Pages / Vercel", icon: "🌐", free: true },
   { name: "Backend", tech: "FastAPI (Python)", host: "Render Free Tier", icon: "⚡", free: true },
   { name: "STT API", tech: "Groq Whisper", host: "Groq Cloud", icon: "🎤", free: true },
-  { name: "LLM API", tech: "Llama 3.3 70B", host: "Groq / Cerebras", icon: "🧠", free: true },
+  { name: "LLM API", tech: "GPT-OSS 120B", host: "Groq OpenAI-compatible API", icon: "🧠", free: true },
   { name: "TTS API", tech: "Azure Speech + fallback voices", host: "Cloud APIs", icon: "🔊", free: true },
   { name: "Database", tech: "Supabase Postgres", host: "Supabase Free", icon: "💾", free: true },
 ];
@@ -89,7 +89,7 @@ export default function ArchitectureSection() {
             Zero local models. Zero GPU. Just lightweight API calls running on free-tier infrastructure, with guidance sourced from official pages and curated service records.
           </p>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-500">
-            The assistant first checks official portals and government pages, then blends that evidence with curated service data before it speaks or shows a guide.
+            The assistant first checks official portals and government pages, then blends that evidence with curated service data before GPT-OSS 120B generates the next response.
           </p>
         </div>
 
