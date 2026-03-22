@@ -3,7 +3,7 @@
  * Extended with guide, YouTube search, and web scraping endpoints
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://janvaani.onrender.com';
 
 export interface GuideStep {
   step_number: number;

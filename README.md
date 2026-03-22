@@ -2,6 +2,11 @@
 
 JanVaani is a source-grounded, multilingual voice assistant for government service guidance in India. It helps users ask in natural language, hear the answer back, and then move into a guide or YouTube walkthrough when one is available.
 
+## Live URLs
+
+- Frontend: https://janvaani-navy.vercel.app
+- Backend: https://janvaani.onrender.com
+
 ## What it does
 
 - Converts speech to text for supported Indian languages and English.
@@ -83,6 +88,12 @@ JanVaani is a source-grounded, multilingual voice assistant for government servi
 3. Copy `backend/.env.example` to `backend/.env` and add your API keys.
 4. Start the frontend with `npm run dev`.
 5. Start the backend with `uvicorn backend.main:app --reload --port 8000`.
+
+## Local development values
+
+- Frontend URL: `http://localhost:5173`
+- Backend URL: `http://localhost:8000`
+- If you switch back to local development, uncomment the localhost lines in `backend/.env` and point `VITE_API_URL` back to `http://localhost:8000`.
 
 ## Notes
 

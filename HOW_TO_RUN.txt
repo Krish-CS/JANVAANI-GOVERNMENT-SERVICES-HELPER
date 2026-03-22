@@ -1,5 +1,9 @@
 JANVAANI - HOW TO RUN
 
+LIVE DEPLOYMENT URLS
+- Frontend: https://janvaani-navy.vercel.app
+- Backend: https://janvaani.onrender.com
+
 1) Prerequisites
 - Node.js 18 or newer
 - Python 3.12 or newer
@@ -10,6 +14,7 @@ JANVAANI - HOW TO RUN
 - Run: npm install
 - Run: npm run dev
 - Open the local Vite URL shown in the terminal.
+- If you want to use the deployed frontend instead, open https://janvaani-navy.vercel.app
 
 3) Backend setup on Windows
 - Open a second terminal in the project root.
@@ -19,6 +24,7 @@ JANVAANI - HOW TO RUN
 - Copy backend/.env.example to backend/.env
 - Add your API keys in backend/.env
 - Run: uvicorn backend.main:app --reload --port 8000
+- If you want local-only mode later, uncomment the localhost lines in backend/.env and set FRONTEND_URL back to http://localhost:5173
 
 4) What each API key is used for
 - GROQ_API_KEY: speech-to-text and primary LLM provider
@@ -30,8 +36,11 @@ JANVAANI - HOW TO RUN
 - BHASHINI_USER_ID / BHASHINI_API_KEY / BHASHINI_PIPELINE_ID: fallback text-to-speech provider
 
 5) Useful checks
-- Backend health: GET http://localhost:8000/api/health
-- Backend config: GET http://localhost:8000/api/config
+- Backend health: GET https://janvaani.onrender.com/api/health
+- Backend config: GET https://janvaani.onrender.com/api/config
+- Local checks if you run it on your machine:
+	- Backend health: GET http://localhost:8000/api/health
+	- Backend config: GET http://localhost:8000/api/config
 
 6) Build for production
 - Frontend: npm run build

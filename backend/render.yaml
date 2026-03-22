@@ -8,8 +8,8 @@ services:
     runtime: python
     region: singapore  # Closest to India
     plan: free
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: GROQ_API_KEY
         sync: false
@@ -17,16 +17,26 @@ services:
         sync: false
       - key: NVIDIA_API_KEY
         sync: false
-      - key: LOCAL_STT_MODEL
-        value: "large-v3"
-      - key: LOCAL_STT_DEVICE
-        value: "cpu"
-      - key: LOCAL_STT_COMPUTE_TYPE
-        value: "int8"
-      - key: LOCAL_TTS_MODEL
-        value: "ai4bharat/indic-parler-tts"
-      - key: LOCAL_TTS_DEVICE
-        value: "cpu"
+      - key: AZURE_SPEECH_KEY
+        sync: false
+      - key: AZURE_SPEECH_REGION
+        sync: false
+      - key: AZURE_TTS_VOICE_EN
+        sync: false
+      - key: AZURE_TTS_VOICE_HI
+        sync: false
+      - key: AZURE_TTS_VOICE_TA
+        sync: false
+      - key: AZURE_TTS_OUTPUT_FORMAT
+        value: "riff-24khz-16bit-mono-pcm"
+      - key: SARVAM_API_KEY
+        sync: false
+      - key: BHASHINI_USER_ID
+        sync: false
+      - key: BHASHINI_API_KEY
+        sync: false
+      - key: BHASHINI_PIPELINE_ID
+        sync: false
       - key: FRONTEND_URL
         sync: false
       - key: PYTHON_VERSION

@@ -1,5 +1,9 @@
 JANVAANI DETAILED PROJECT REPORT
 
+Live deployment:
+- Frontend: https://janvaani-navy.vercel.app
+- Backend: https://janvaani.onrender.com
+
 1. Project Summary
 JanVaani is a voice-first government services helper for Indian citizens. The application is designed to reduce the friction of understanding and using digital public services by combining speech, language understanding, official-source grounding, and tutorial guidance.
 
@@ -80,7 +84,12 @@ The codebase includes support patterns for services such as:
 - Docker-based backend deployment
 - Static frontend deployment on Vercel, Netlify, or GitHub Pages
 
-11. Notes
+11. Environment Modes
+- Local development values stay documented in backend/.env and backend/.env.example
+- The localhost lines are commented so they can be restored manually when needed
+- The deployed values currently point to the Vercel and Render URLs above
+
+12. Notes
 - The project is source-grounded and should not be described as AI-only.
 - The repository should keep .env files out of git.
 - The LLM model default is openai/gpt-oss-120b for Groq compatibility.

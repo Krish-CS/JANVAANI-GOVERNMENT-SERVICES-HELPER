@@ -8,7 +8,7 @@ const API_BASE_URL =
   import.meta.env.VITE_API_URL ||
   (window.location.hostname === "localhost"
     ? "http://localhost:8000"
-    : "https://janvaani-api.onrender.com");
+    : "https://janvaani.onrender.com");
 
 const LOCALHOST_FALLBACK_URLS = [
   "http://localhost:8000",
