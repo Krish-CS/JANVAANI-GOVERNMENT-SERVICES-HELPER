@@ -151,6 +151,25 @@ class GuideGeneratorService:
                 "input_value": step.input_value,
             })
 
+        # Build all derived content once so guide fields and generated steps stay consistent.
+        status, availability_en, availability_hi, availability_ta = self._determine_online_availability(scraped_content)
+        documents, documents_hi, documents_ta = self._enrich_documents(service, scraped_content)
+        eligibility_en, eligibility_hi, eligibility_ta = self._enrich_eligibility(
+            service,
+            scraped_content,
+            status,
+            availability_en,
+            availability_hi,
+            availability_ta,
+        )
+        contact_en, contact_hi, contact_ta = self._build_contact_summary(
+            service,
+            status,
+            availability_en,
+            availability_hi,
+            availability_ta,
+        )
+
         # Create guide from curated data
         guide = GeneratedGuide(
             service_id=service.id,
@@ -160,7 +179,15 @@ class GuideGeneratorService:
             category=service.category,
             official_url=service.official_url,
             department=service.department,
-            steps=self._create_guide_steps(service, scraped_content, availability_source_url),
+            steps=self._create_guide_steps(
+                service,
+                scraped_content,
+                availability_source_url,
+                status,
+                availability_en,
+                availability_hi,
+                availability_ta,
+            ),
             required_documents=documents,
             required_documents_hi=documents_hi,
             required_documents_ta=documents_ta,
@@ -374,6 +401,10 @@ class GuideGeneratorService:
         service: GovernmentService,
         scraped_content: str | None,
         availability_source_url: str,
+        status: str,
+        availability_en: str,
+        availability_hi: str,
+        availability_ta: str,
     ) -> list[GuideStep]:
         """Convert service steps to GuideStep format."""
         steps: list[GuideStep] = []
@@ -381,24 +412,6 @@ class GuideGeneratorService:
             len(service.steps),
             len(service.steps_hi),
             len(service.steps_ta),
-        )
-
-        status, availability_en, availability_hi, availability_ta = self._determine_online_availability(scraped_content)
-        documents, documents_hi, documents_ta = self._enrich_documents(service, scraped_content)
-        eligibility_en, eligibility_hi, eligibility_ta = self._enrich_eligibility(
-            service,
-            scraped_content,
-            status,
-            availability_en,
-            availability_hi,
-            availability_ta,
-        )
-        contact_en, contact_hi, contact_ta = self._build_contact_summary(
-            service,
-            status,
-            availability_en,
-            availability_hi,
-            availability_ta,
         )
 
         availability_prefix_en = (

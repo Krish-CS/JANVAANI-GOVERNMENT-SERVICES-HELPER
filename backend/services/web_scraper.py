@@ -12,6 +12,7 @@ import asyncio
 from dataclasses import dataclass
 from typing import Literal
 from urllib.parse import urljoin
+from urllib.parse import urlparse
 
 import httpx
 from bs4 import BeautifulSoup
@@ -84,12 +85,15 @@ class WebScraperService:
 
     def _is_official_domain(self, url: str) -> bool:
         """Check if URL belongs to an official government domain."""
+        parsed = urlparse(url)
+        host = (parsed.hostname or "").lower()
         for domain in OFFICIAL_DOMAINS.keys():
-            if domain in url.lower():
+            normalized_domain = domain.lower()
+            if host == normalized_domain or host.endswith(f".{normalized_domain}"):
                 return True
         return False
 
-    async def scrape_url(self, url: str) -> ScrapedContent:
+    async def scrape_url(self, url: str, quiet_404: bool = False) -> ScrapedContent:
         """
         Scrape content from a government website.
 
@@ -199,6 +203,22 @@ class WebScraperService:
                 success=False,
                 error=f"Timeout: {str(e)}",
             )
+        except httpx.HTTPStatusError as e:
+            status_code = e.response.status_code
+            if status_code == 404 and quiet_404:
+                logger.info("ℹ️ Candidate page not found (404): %s", url)
+            elif 400 <= status_code < 500:
+                logger.warning("⚠️ Client error scraping %s: %s", url, e)
+            else:
+                logger.error("⚠️ HTTP status error scraping %s: %s", url, e)
+            return ScrapedContent(
+                url=url,
+                title="",
+                content="",
+                links=[],
+                success=False,
+                error=f"HTTP Error: {str(e)}",
+            )
         except httpx.HTTPError as e:
             logger.error("⚠️ HTTP error scraping %s: %s", url, e)
             return ScrapedContent(
@@ -277,7 +297,7 @@ class WebScraperService:
             ]
 
         for url in urls_to_try:
-            result = await self.scrape_url(url)
+            result = await self.scrape_url(url, quiet_404=True)
             if result.success:
                 return result
 
