@@ -2,6 +2,11 @@
 
 JanVaani is a multilingual voice assistant for government service guidance. The project is built to help users understand public-service workflows without needing to read long web pages or navigate complex portals on their own.
 
+## Live Deployment
+
+- Frontend: https://janvaani-navy.vercel.app
+- Backend: https://janvaani.onrender.com
+
 ## Product Goal
 
 The goal is to reduce friction for citizens who need help with services such as Aadhaar updates, ration card workflows, PM Kisan checks, voter ID guidance, and similar public-service journeys.
@@ -73,6 +78,11 @@ The backend also enforces language purity so the answer does not drift into mixe
 - LLM fallback: Cerebras, then NVIDIA NIM
 - TTS primary: Azure Speech
 - TTS fallback: Sarvam, then Bhashini
+
+## Deployment Notes
+
+- Render is pinned to Python 3.12.0 through [backend/.python-version](../backend/.python-version) and the `PYTHON_VERSION` env var in [backend/render.yaml](../backend/render.yaml).
+- Local development values remain documented in [backend/.env.example](../backend/.env.example) for manual switching back later.
 
 ## Files Worth Reading
 

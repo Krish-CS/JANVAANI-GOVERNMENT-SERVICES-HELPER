@@ -6,6 +6,7 @@ JanVaani is a source-grounded, multilingual voice assistant for government servi
 
 - Frontend: https://janvaani-navy.vercel.app
 - Backend: https://janvaani.onrender.com
+- Render Python pin: 3.12.0 via [backend/.python-version](backend/.python-version)
 
 ## What it does
 
